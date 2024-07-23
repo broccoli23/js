@@ -183,3 +183,17 @@ function globalCollectEnergybar(player,item) {
   item.disableBody(true, true);
   updateInventory.call(this)
 }
+
+// function globalCollectLeon(player,item) {
+//   console.log("*** player overlap item");
+
+//   this.collectItemSnd = this.sound.add("collectItem").setVolume(2);
+
+//     // play sound
+//     this.collectItemSnd.play()
+
+// // increase key count
+//   window.Leon++;
+//   item.disableBody(true, true);
+//   updateInventory.call(this)
+// }

@@ -28,6 +28,7 @@
         this.load.image('torch', 'assets/torchshowinventory.png');
         this.load.image('energybarOl', 'assets/energybaroutline.png');
         this.load.image('energybar', 'assets/energybarshowinventory.png');
+        this.load.spritesheet('leon', 'assets/Leon.png',{ frameWidth:64, frameHeight:64 });
     }
 
     create () {
@@ -62,8 +63,7 @@
        this.torch = this.add.image (750, 32, 'torch').setScrollFactor(0).setVisible(false).setScale(0.5);  
        this.energybarOl = this.add.image (820, 32, 'energybarOl').setScrollFactor(0).setVisible(true).setScale(0.5);   
        this.energybar = this.add.image (820, 32, 'energybar').setScrollFactor(0).setVisible(false).setScale(0.5);  
-       this.leon = this.add.image (820, 32, 'leon').setScrollFactor(0).setVisible(false).setScale(0.5);  
-
+    
                
        // Recv an event, call the method
        this.events.on('inventory', this.updateScreen, this)

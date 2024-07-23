@@ -447,6 +447,17 @@ if (
   this.museum();
 }
 
+if (
+  this.player.x > 1866 &&
+  this.player.x < 1930 &&
+  this.player.y > 371 &&
+  this.player.y < 435
+) 
+{
+  console.log('player touch door')
+  this.winningscene();
+}
+
   } /////////////////// end of update //////////////////////////////
 
 
@@ -471,6 +482,14 @@ if (
   museum(player, tile) {
     console.log("museum function");
     this.scene.start("museum", {
+      player: player,
+      inventory: this.inventory,
+    });
+  }
+
+  winningscene(player, tile) {
+    console.log("winningscene function");
+    this.scene.start("winningscene", {
       player: player,
       inventory: this.inventory,
     });

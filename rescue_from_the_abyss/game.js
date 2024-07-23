@@ -15,7 +15,7 @@
     // },
     backgroundColor: '#000000',
     pixelArt: true,
-    scene: [preload, intro2, intro3, intro4, intro5, abandonbuilding, world, store, hospital, museum, gameOver, showInventory ]
+    scene: [preload, intro2, intro3, intro4, intro5, abandonbuilding, world, store, hospital, museum, gameOver, winningscene, showInventory ]
 };
 
 var game = new Phaser.Game(config);

@@ -139,44 +139,18 @@ class store extends Phaser.Scene {
        this.energybar = this.physics.add.sprite(1177, 921, 'energybarIMG').play('energybarAnim')
 
        const fx4 = this.aidkit.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-    
-this.tweens.add({
-      targets: fx4,
-      outerStrength: 15,
-      yoyo: true,
-      loop: -1,
-      ease: "sine.inout",
-    });
-
-    const fx5 = this.torch.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-    
-this.tweens.add({
-      targets: fx5,
-      outerStrength: 15,
-      yoyo: true,
-      loop: -1,
-      ease: "sine.inout",
-    });
-
-    const fx6 = this.survivalknife.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-    
-this.tweens.add({
-      targets: fx6,
-      outerStrength: 15,
-      yoyo: true,
-      loop: -1,
-      ease: "sine.inout",
-    });
-
-    const fx7 = this.energybar.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-    
-this.tweens.add({
-      targets: fx7,
-      outerStrength: 15,
-      yoyo: true,
-      loop: -1,
-      ease: "sine.inout",
-    });
+       const fx5 = this.torch.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
+       const fx6 = this.survivalknife.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
+       const fx7 = this.energybar.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
+       
+       this.tweens.add({
+        targets: [fx4, fx5, fx6,fx7],
+        outerStrength: 15,
+        yoyo: true,
+        loop: -1,
+        ease: "sine.inout",
+      });
+  
 
        // debug player
        window.player = this.player

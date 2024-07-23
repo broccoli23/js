@@ -214,7 +214,7 @@ class hospital extends Phaser.Scene {
 
    this.leon = this.physics.add.sprite(280, 100, 'leon').play("leon-down");
 
-   this.physics.add.overlap(this.player, this.leon, globalCollectLeon, null, this);
+  //  this.physics.add.overlap(this.player, this.leon, globalCollectLeon, null, this);
 
   //shooting
 //   this.bullet = this.physics.add.sprite(
