@@ -498,16 +498,16 @@ if (
   this.player.x > 1866 &&
   this.player.x < 1930 &&
   this.player.y > 371 &&
-  this.player.y < 435 
-  // window.map > 0 &&
-  // window.longbow > 0 &&
-  // window.compass > 0 &&
-  // window.aidkit > 0 &&
-  // window.survivalknife > 0 &&
-  // window.torch > 0 &&
-  // window.energybar > 0 &&
-  // window.leon > 0 &&
-  // window.sheldon > 0
+  this.player.y < 435 &&
+  window.map > 0 &&
+  window.longbow > 0 &&
+  window.compass > 0 &&
+  window.aidkit > 0 &&
+  window.survivalknife > 0 &&
+  window.torch > 0 &&
+  window.energybar > 0 &&
+  window.leon > 0 &&
+  window.sheldon > 0
 ) 
 {
   console.log('player touch door')
