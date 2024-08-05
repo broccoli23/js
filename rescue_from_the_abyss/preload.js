@@ -30,24 +30,10 @@ class preload extends Phaser.Scene {
       // start the background musicc
       window.music.play(); 
   
-      // Check for spacebar or any key here
-      var spaceDown = this.input.keyboard.addKey("SPACE");
-  
-      // On spacebar event, call the world scene
-      spaceDown.on(
-        "down",
-        function () {
-          console.log("Jump to intro1 scene");
-  
-        let playerPos = {};
+      let playerPos = {};
         playerPos.x = 338;
         playerPos.y = 196;
         this.scene.start("intro1", { playerPos: playerPos });
-        },
-        this
-      );
-
-      this.preload = this.add.image(0, 0, 'preloadIMG').setOrigin(0, 0).setScale(1);
     }
   }
   
