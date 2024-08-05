@@ -67,15 +67,6 @@ class intro5 extends Phaser.Scene {
        this.map = this.physics.add.sprite(180, 600, 'mapIMG').play('mapAnim').setScale(4);
        this.compass = this.physics.add.sprite(380, 600, 'compassIMG').play('compassAnim').setScale(4);
        this.longbow = this.physics.add.sprite(580, 600, 'longbowIMG').play('longbowAnim').setScale(2);
-
-
-      // Add any text in the main page
-      // this.add.text(10, 10, "Press spacebar to continue", {
-      //   font: "30px Courier",
-      //   fill: "#FFFFFF",
-      // });
-  
-      // Create all the game animations here
     }
   }
   

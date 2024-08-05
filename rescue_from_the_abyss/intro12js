@@ -1,0 +1,41 @@
+class intro12 extends Phaser.Scene {
+    constructor() {
+      super("intro12");
+  
+      // Put global variable here
+    }
+  
+    init(data) {
+      this.playerPos = data.playerPos;
+      this.inventory = data.inventory;
+    }
+  
+    preload() {
+      this.load.image("intro12IMG", "assets/intro12.jpg");
+    }
+  
+    create() {
+      console.log("*** intro12 scene");
+  
+      // Check for spacebar or any key here
+      var spaceDown = this.input.keyboard.addKey("SPACE");
+  
+      // On spacebar event, call the world scene
+      spaceDown.on(
+        "down",
+        function () {
+          console.log("Jump to world scene");
+          let playerPos = {};
+          playerPos.x = 1670;
+          playerPos.y = 387;
+          this.scene.start("world", { playerPos: playerPos });
+          },
+        this
+      );
+  
+      this.intro = this.add.image(0, 0, 'intro12IMG').setOrigin(0, 0).setScale(1);
+    }
+
+  }
+  
+  

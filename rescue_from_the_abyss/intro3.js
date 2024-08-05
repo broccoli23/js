@@ -68,16 +68,6 @@ class intro3 extends Phaser.Scene {
       this.player = this.physics.add.sprite(920, 130, 'kyzo').play("kyzo-down").setScale(2.5);
       this.player = this.physics.add.sprite(720, 130, 'leon').play("leon-down").setScale(2.5);
       this.player = this.physics.add.sprite(1120, 130, 'sheldon').play("sheldon-down").setScale(2.5);
-
-
-
-      // Add any text in the main page
-      // this.add.text(10, 10, "Press spacebar to continue", {
-      //   font: "30px Courier",
-      //   fill: "#FFFFFF",
-      // });
-  
-      // Create all the game animations here
     }
   }
   

@@ -13,18 +13,22 @@ class preload extends Phaser.Scene {
     preload() {
       this.load.audio("bgmusic","assets/bgmusic.mp3");
       this.load.audio("collectItem","assets/collectItem.mp3");
-      this.load.image("intro1IMG", "assets/intro1.jpg");
+      this.load.audio("death","assets/death.mp3");
+      this.load.audio("collectPlayer","assets/collectPlayer.mp3");
+      this.load.audio("damage","assets/damage.mp3");
+      this.load.audio("enemydamage","assets/enemydamage.mp3");
+      this.load.audio("winningsound","assets/winningsound.mp3");
+      this.load.image("preloadIMG", "assets/preload.jpg");
     }
   
     create() {
       console.log("*** preload scene");
 
-      
 
       // turn on loop, adjust the volume
-      this.music = this.sound.add("bgmusic",{loop: true}).setVolume(0.08);
+      window.music = this.sound.add("bgmusic",{loop: true}).setVolume(0.08);
       // start the background musicc
-      this.music.play(); 
+      window.music.play(); 
   
       // Check for spacebar or any key here
       var spaceDown = this.input.keyboard.addKey("SPACE");
@@ -33,24 +37,17 @@ class preload extends Phaser.Scene {
       spaceDown.on(
         "down",
         function () {
-          console.log("Jump to intro2 scene");
+          console.log("Jump to intro1 scene");
   
         let playerPos = {};
         playerPos.x = 338;
         playerPos.y = 196;
-        this.scene.start("intro2", { playerPos: playerPos });
+        this.scene.start("intro1", { playerPos: playerPos });
         },
         this
       );
-  
-      this.intro = this.add.image(0, 0, 'intro1IMG').setOrigin(0, 0).setScale(1);
-      // Add any text in the main page
-      // this.add.text(10, 10, "Press spacebar to continue", {
-      //   font: "30px Courier",
-      //   fill: "#FFFFFF",
-      // });
-  
-      // Create all the game animations here
+
+      this.preload = this.add.image(0, 0, 'preloadIMG').setOrigin(0, 0).setScale(1);
     }
   }
   

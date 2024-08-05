@@ -28,7 +28,10 @@
         this.load.image('torch', 'assets/torchshowinventory.png');
         this.load.image('energybarOl', 'assets/energybaroutline.png');
         this.load.image('energybar', 'assets/energybarshowinventory.png');
-        this.load.spritesheet('leon', 'assets/Leon.png',{ frameWidth:64, frameHeight:64 });
+        this.load.image('leonOl', 'assets/leonoutline.png');
+        this.load.image('leon', 'assets/leonshowinventory.png');
+        this.load.image('sheldonOl', 'assets/sheldonoutline.png');
+        this.load.image('sheldon', 'assets/sheldonshowinventory.png');
     }
 
     create () {
@@ -44,9 +47,9 @@
         graphics.fillRectShape(rect).setScrollFactor(0)
 
        // Setup heart but visible to false
-       this.heartimg1 = this.add.image (100,32,'heart').setScrollFactor(0).setVisible(false).setScale(0.5);
-       this.heartimg2 = this.add.image (170,32,'heart').setScrollFactor(0).setVisible(false).setScale(0.5);
-       this.heartimg3 = this.add.image (240,32,'heart').setScrollFactor(0).setVisible(false).setScale(0.5);
+       this.heartimg1 = this.add.image (100,32,'heart').setScrollFactor(0).setVisible(true).setScale(0.5);
+       this.heartimg2 = this.add.image (170,32,'heart').setScrollFactor(0).setVisible(true).setScale(0.5);
+       this.heartimg3 = this.add.image (240,32,'heart').setScrollFactor(0).setVisible(true).setScale(0.5);
 
        // collect item but outline to collected item
        this.compassOl = this.add.image (400, 32, 'compassOl').setScrollFactor(0).setVisible(true).setScale(0.5);     
@@ -63,8 +66,11 @@
        this.torch = this.add.image (750, 32, 'torch').setScrollFactor(0).setVisible(false).setScale(0.5);  
        this.energybarOl = this.add.image (820, 32, 'energybarOl').setScrollFactor(0).setVisible(true).setScale(0.5);   
        this.energybar = this.add.image (820, 32, 'energybar').setScrollFactor(0).setVisible(false).setScale(0.5);  
-    
-               
+       this.leonOl = this.add.image (1030, 32, 'leonOl').setScrollFactor(0).setVisible(true).setScale(0.5);   
+       this.leonIMG = this.add.image (1030, 25, 'leon').setScrollFactor(0).setVisible(false).setScale(0.8);  
+       this.sheldonOl = this.add.image (1100, 32, 'sheldonOl').setScrollFactor(0).setVisible(true).setScale(0.5);   
+       this.sheldonIMG = this.add.image (1100, 25, 'sheldon').setScrollFactor(0).setVisible(false).setScale(0.8);  
+   
        // Recv an event, call the method
        this.events.on('inventory', this.updateScreen, this)
 
@@ -113,6 +119,18 @@
             // toggle the setVisible from false to true
             this.energybarOl.setVisible(false);
             this.energybar.setVisible(true);
+        }
+
+        if ( data.leon > 0 ) {
+            // toggle the setVisible from false to true
+            this.leonOl.setVisible(false);
+            this.leonIMG.setVisible(true);
+        }
+
+        if ( data.sheldon > 0 ) {
+            // toggle the setVisible from false to true
+            this.sheldonOl.setVisible(false);
+            this.sheldonIMG.setVisible(true);
         }
 
         switch ( data.heart ) {

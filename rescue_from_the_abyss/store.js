@@ -53,35 +53,35 @@ class store extends Phaser.Scene {
     
         let tilesArray = [townTiles, classroomTiles, groceryTiles, interiorTiles, officeTiles];
         // Load in layers by layers
-        let floorLayer = map.createLayer(
+        this.floorLayer = map.createLayer(
           "floorLayer",
           [townTiles, classroomTiles, groceryTiles, interiorTiles, officeTiles],
           0,
           0
         );
     
-        let wallLayer = map.createLayer(
+        this.wallLayer = map.createLayer(
           "wallLayer",
           [townTiles, classroomTiles, groceryTiles, interiorTiles, officeTiles],
           0,
           0
         )
 
-        let wallLayer2 = map.createLayer(
+        this.wallLayer2 = map.createLayer(
           "wallLayer2",
           [townTiles, classroomTiles, groceryTiles, interiorTiles, officeTiles],
           0,
           0
         )
     
-        let furnitureLayer = map.createLayer(
+        this.furnitureLayer = map.createLayer(
           "furnitureLayer",
           [townTiles, classroomTiles, groceryTiles, interiorTiles, officeTiles],
           0,
           0
         )
 
-        let furnitureLayer2 = map.createLayer(
+        this.furnitureLayer2 = map.createLayer(
           "furnitureLayer2",
           [townTiles, classroomTiles, groceryTiles, interiorTiles, officeTiles],
           0,
@@ -89,7 +89,7 @@ class store extends Phaser.Scene {
         )
     
     
-        let itemLayer = map.createLayer(
+        this.itemLayer = map.createLayer(
           "itemLayer",
           [townTiles, classroomTiles, groceryTiles, interiorTiles, officeTiles],
           0,
@@ -131,26 +131,12 @@ class store extends Phaser.Scene {
         // kyzo is the alias in preload 
        let start  = map.findObject("objectLayer",(obj) => obj.name === "start");
        this.player = this.physics.add.sprite(start.x, start.y, 'kyzo');
-       this.player.body.setSize(this.player.width * 0.5, this.player.height * 0.7)
+       this.player.body.setSize(this.player.width * 0.3, this.player.height * 0.9)
 
        this.aidkit = this.physics.add.sprite(64, 204, 'aidkiIMG').play('aidkitAnim')
        this.torch = this.physics.add.sprite(597, 724, 'torchIMG').play('torchAnim')
        this.survivalknife = this.physics.add.sprite(260, 1108, 'survivalknifeIMG').play('survivalknifeAnim')
        this.energybar = this.physics.add.sprite(1177, 921, 'energybarIMG').play('energybarAnim')
-
-       const fx4 = this.aidkit.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-       const fx5 = this.torch.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-       const fx6 = this.survivalknife.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-       const fx7 = this.energybar.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-       
-       this.tweens.add({
-        targets: [fx4, fx5, fx6,fx7],
-        outerStrength: 15,
-        yoyo: true,
-        loop: -1,
-        ease: "sine.inout",
-      });
-  
 
        // debug player
        window.player = this.player
@@ -195,14 +181,14 @@ class store extends Phaser.Scene {
       this.physics.add.overlap(this.player, this.energybar, globalCollectEnergybar, null, this);
 
       //set collision
-      // this.wallLayer.setCollisionByExclusion(-1, true);
-      // this.wallLayer2.setCollisionByExclusion(-1, true);
-      // this.furnitureLayer.setCollisionByExclusion(-1, true);
-      // this.furnitureLayer2.setCollisionByExclusion(-1, true);
-      // this.physics.add.collider(this.wallLayer, this.player);
-      // this.physics.add.collider(this.wallLayer2, this.player);
-      // this.physics.add.collider(this.furnitureLayer, this.player);
-      // this.physics.add.collider(this.furnitureLayer2, this.player);
+      this.wallLayer.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.wallLayer, this.player);
+      this.wallLayer2.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.wallLayer2, this.player);
+      this.furnitureLayer2.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.furnitureLayer2, this.player);
+      this.furnitureLayer.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.furnitureLayer, this.player);
 
      // create the arrow keys
      this.cursors = this.input.keyboard.createCursorKeys();
@@ -217,41 +203,47 @@ class store extends Phaser.Scene {
       update() {
         let speed = 200;
     
-    if (this.cursors.left.isDown) {
-        this.player.body.setVelocityX(-speed);
-        this.player.anims.play("kyzo-left", true); // walk left
-    } else if (this.cursors.right.isDown) {
-        this.player.body.setVelocityX(speed);
-        this.player.anims.play("kyzo-right", true);
-    } else if (this.cursors.up.isDown) {
-        this.player.body.setVelocityY(-speed);
-        this.player.anims.play("kyzo-up", true);
-    } else if (this.cursors.down.isDown) {
-        this.player.body.setVelocityY(speed);
-        this.player.anims.play("kyzo-down", true);
-    } else {
-        this.player.anims.stop();
-        this.player.body.setVelocity(0, 0);
-    }
+ 
+        if (this.cursors.left.isDown) {
+          this.player.body.setVelocityX(-speed);
+          this.player.body.setVelocityY(0);
+          this.player.anims.play("kyzo-left", true); 
+      } else if (this.cursors.right.isDown) {
+          this.player.body.setVelocityX(speed);
+          this.player.body.setVelocityY(0);
+          this.player.anims.play("kyzo-right", true);
+      } else if (this.cursors.up.isDown) {
+          this.player.body.setVelocityY(-speed);
+          this.player.body.setVelocityX(0);
+          this.player.anims.play("kyzo-up", true);
+      } else if (this.cursors.down.isDown) {
+          this.player.body.setVelocityY(speed);
+          this.player.body.setVelocityX(0);
+          this.player.anims.play("kyzo-down", true);
+      } else {
+          this.player.anims.stop();
+          this.player.body.setVelocity(0, 0);
+      }
 
     if (
         this.player.x > 943 &&
         this.player.x < 1071 &&
         this.player.y > 36 &&
-        this.player.y < 120
+        this.player.y < 120 &&
+        window.aidkit > 0 &&
+        window.survivalknife > 0 &&
+        window.torch > 0 &&
+        window.energybar > 0
       ) 
       {
         console.log('player touch door')
-        this.world();
+        this.intro8();
       }
       }/////////////////// end of update /////////////////////////////
 
-      world(player, tile) {
-        console.log("world function");
-        let playerPos = {};
-        playerPos.x = 1609;
-        playerPos.y = 823;
-        this.scene.start("world", { playerPos: playerPos });
+      intro8(player, tile) {
+        console.log("intro8 function");
+        this.scene.start("intro8");
       }
     }
        

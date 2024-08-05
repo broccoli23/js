@@ -15,6 +15,8 @@ function updateInventory() {
     this.inventory.survivalknife = window.survivalknife
     this.inventory.energybar = window.energybar
     this.inventory.torch = window.torch
+    this.inventory.leon = window.leon
+    this.inventory.sheldon = window.sheldon
     this.inventory.heart = window.heart
      
     console.log('*** updateInventory() Emit event', this.inventory)
@@ -36,6 +38,11 @@ function updateInventory() {
       // Shake screen
      this.cameras.main.shake(100);
      //this.hitenemySnd.play();
+
+     this.damageSnd = this.sound.add("damage").setVolume(2);
+
+    // play sound
+    this.damageSnd.play()
   
 		  // deduct heart
       window.heart--;
@@ -46,38 +53,75 @@ function updateInventory() {
  
     if (window.heart == 0){
 	    console.log("*** player gameOver");
+
+      this.deathSnd = this.sound.add("death").setVolume(2);
+
+    // play sound
+    this.deathSnd.play()
+
       this.scene.start("gameOver");
-      //this.loselifeSnd.play();
     }
   }
 
-  // function globalAttackLeft() {
+  function globalHitOoze(player,ooze) {
+    console.log("*** player overlap ooze");
+   
+    // Shake screen
+   this.cameras.main.shake(100);
+   //this.hitenemySnd.play();
+
+   this.damageSnd = this.sound.add("damage").setVolume(2);
+
+  // play sound
+  this.damageSnd.play()
+
+    // deduct heart
+    window.heart--;
+    ooze.disableBody(true, true);
     
-  //   console.log("attack left");
+    // Call globalFunctions.js updateInventory
+    updateInventory.call(this)
 
-  //   this.bullet.x = this.player.x;
-  //   this.bullet.y = this.player.y;
+  if (window.heart == 0){
+    console.log("*** player gameOver");
 
-  //   this.bullet.setVisible(true);
-  //   this.bullet.body.setEnable(true);
+    this.deathSnd = this.sound.add("death").setVolume(2);
 
-	//   // speed of the bullet
-  //   this.bullet.body.setVelocityX(-500);
-  // }
+  // play sound
+  this.deathSnd.play()
 
-  // function globalAttackRight() {
+    this.scene.start("gameOver");
+  }
+}
 
-  // console.log("attack right");
+    function globalShootEnemy(player, enemy) {
+      console.log("*** bullet overlap enemy");
 
-  // this.bullet.x = this.player.x;
-  // this.bullet.y = this.player.y;
+      this.enemydamageSnd = this.sound.add("enemydamage").setVolume(2);
 
-  // this.bullet.setVisible(true);
-  // this.bullet.body.setEnable(true);
+    // play sound
+    this.enemydamageSnd.play()
 
-  // // speed of the bullet
-  // this.bullet.body.setVelocityX(500);
-// }
+      enemy.disableBody(true, true);
+  
+      // Call globalFunctions.js updateInventory
+      updateInventory.call(this)
+    }
+
+    function globalShootTaurak(player, enemy) {
+        console.log("*** bullet overlap enemy");
+
+      this.enemydamageSnd = this.sound.add("enemydamage").setVolume(2);
+
+      // play sound
+      this.enemydamageSnd.play()
+
+        enemy.disableBody(true, true);
+    
+        // Call globalFunctions.js updateInventory
+        updateInventory.call(this)
+  }
+
   
   ////////////////////////////////////////////////////////
   //
@@ -184,16 +228,46 @@ function globalCollectEnergybar(player,item) {
   updateInventory.call(this)
 }
 
-// function globalCollectLeon(player,item) {
-//   console.log("*** player overlap item");
+function globalCollectLeon(player,item) {
+  console.log("*** player overlap item");
 
-//   this.collectItemSnd = this.sound.add("collectItem").setVolume(2);
+  this.collectPlayerSnd = this.sound.add("collectPlayer").setVolume(2);
 
-//     // play sound
-//     this.collectItemSnd.play()
+    // play sound
+    this.collectPlayerSnd.play()
 
-// // increase key count
-//   window.Leon++;
-//   item.disableBody(true, true);
-//   updateInventory.call(this)
-// }
+// increase key count
+  window.leon++;
+  item.disableBody(true, true);
+  updateInventory.call(this)
+}
+
+function globalCollectSheldon(player,item) {
+  console.log("*** player overlap item");
+
+  this.collectPlayerSnd = this.sound.add("collectPlayer").setVolume(2);
+
+    // play sound
+    this.collectPlayerSnd.play()
+
+// increase key count
+  window.sheldon++;
+  item.disableBody(true, true);
+  updateInventory.call(this)
+}
+
+function globalCollectHeart(player, item) {
+  console.log("*** player overlap heart");
+
+  this.collectPlayerSnd = this.sound.add("collectPlayer").setVolume(2);
+    // play sound
+    this.collectPlayerSnd.play()
+
+  // increase key count
+  window.heart++;
+  if (window.heart > 3){
+    window.heart=3
+  }
+  item.disableBody(true, true);
+  updateInventory.call(this)
+}

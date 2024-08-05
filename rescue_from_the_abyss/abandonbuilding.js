@@ -33,6 +33,9 @@ class abandonbuilding extends Phaser.Scene {
 
       create() {
         console.log("*** abandonbuilding scene");
+
+         // turn on loop, adjust the volume
+         window.music.setVolume(0.08);
     
         // Create the map from main
         let map = this.make.tilemap({
@@ -120,29 +123,11 @@ class abandonbuilding extends Phaser.Scene {
        this.longbow = this.physics.add.sprite(498, 190, 'longbowIMG').play('longbowAnim')
 
 //        const fx1 = this.map.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
+//        const fx2 = this.compass.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
+//            const fx3 = this.longbow.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
     
 // this.tweens.add({
-//       targets: fx1,
-//       outerStrength: 15,
-//       yoyo: true,
-//       loop: -1,
-//       ease: "sine.inout",
-//     });
-
-//     const fx2 = this.compass.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-    
-// this.tweens.add({
-//       targets: fx2,
-//       outerStrength: 15,
-//       yoyo: true,
-//       loop: -1,
-//       ease: "sine.inout",
-//     });
-
-//     const fx3 = this.longbow.postFX.addGlow(0xffffff, 4, 0, false, 0.5, 32);
-    
-// this.tweens.add({
-//       targets: fx3,
+//       targets: [fx1, fx2, fx3],
 //       outerStrength: 15,
 //       yoyo: true,
 //       loop: -1,
@@ -220,27 +205,37 @@ class abandonbuilding extends Phaser.Scene {
 
   this.tint = this.add.image(0, 0, 'tintIMG').setOrigin(0, 0).setScale(1);
 
-      }
+  this.physics.world.bounds.width = this.baseLayer.width;
+  this.physics.world.bounds.height = this.baseLayer.height;
+    
+  this.player.setCollideWorldBounds(true)
+
+  }
 
       update() {
         let speed = 200;
     
-    if (this.cursors.left.isDown) {
-        this.player.body.setVelocityX(-speed);
-        this.player.anims.play("kyzo-left", true); // walk left
-    } else if (this.cursors.right.isDown) {
-        this.player.body.setVelocityX(speed);
-        this.player.anims.play("kyzo-right", true);
-    } else if (this.cursors.up.isDown) {
-        this.player.body.setVelocityY(-speed);
-        this.player.anims.play("kyzo-up", true);
-    } else if (this.cursors.down.isDown) {
-        this.player.body.setVelocityY(speed);
-        this.player.anims.play("kyzo-down", true);
-    } else {
-        this.player.anims.stop();
-        this.player.body.setVelocity(0, 0);
-    }
+     
+        if (this.cursors.left.isDown) {
+          this.player.body.setVelocityX(-speed);
+          this.player.body.setVelocityY(0);
+          this.player.anims.play("kyzo-left", true); 
+      } else if (this.cursors.right.isDown) {
+          this.player.body.setVelocityX(speed);
+          this.player.body.setVelocityY(0);
+          this.player.anims.play("kyzo-right", true);
+      } else if (this.cursors.up.isDown) {
+          this.player.body.setVelocityY(-speed);
+          this.player.body.setVelocityX(0);
+          this.player.anims.play("kyzo-up", true);
+      } else if (this.cursors.down.isDown) {
+          this.player.body.setVelocityY(speed);
+          this.player.body.setVelocityX(0);
+          this.player.anims.play("kyzo-down", true);
+      } else {
+          this.player.anims.stop();
+          this.player.body.setVelocity(0, 0);
+      }
 
     if (
         this.player.x > 371 &&
@@ -253,16 +248,13 @@ class abandonbuilding extends Phaser.Scene {
       ) 
       {
         console.log('player touch door')
-        this.world();
+        this.intro6();
       }
       }/////////////////// end of update //////////////////////////////
 
-      world(player, tile) {
-        console.log("world function");
-        let playerPos = {};
-        playerPos.x = 979;
-        playerPos.y =603;
-        this.scene.start("world", { playerPos: playerPos });
-      }
+    intro6(player, tile) {
+      console.log("intro6 function");
+      this.scene.start("intro6");
+    }
     }
        

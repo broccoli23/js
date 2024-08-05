@@ -25,12 +25,12 @@ class intro4 extends Phaser.Scene {
       spaceDown.on(
         "down",
         function () {
-          console.log("Jump to intro5 scene");
+          console.log("Jump to gamecontrol scene");
   
         let playerPos = {};
         playerPos.x = 338;
         playerPos.y = 196;
-        this.scene.start("intro5", { playerPos: playerPos });
+        this.scene.start("gamecontrol", { playerPos: playerPos });
         },
         this
       );
@@ -47,15 +47,6 @@ class intro4 extends Phaser.Scene {
     });
 
       this.trophy = this.physics.add.sprite(920, 200, 'trophy').play('trophyAnim').setScale(4);
-
-
-      // Add any text in the main page
-      // this.add.text(10, 10, "Press spacebar to continue", {
-      //   font: "30px Courier",
-      //   fill: "#FFFFFF",
-      // });
-  
-      // Create all the game animations here
     }
   }
   
